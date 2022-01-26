@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BeerDetailViewController: UITableViewController {
     var beer: Beer?
@@ -18,7 +19,7 @@ class BeerDetailViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BeerDetailListCell")
         tableView.rowHeight = UITableView.automaticDimension
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
         let headerView = UIImageView(frame: frame)
         let imageURL = URL(string: beer?.imageURL ?? "")
         headerView.contentMode = .scaleAspectFit
@@ -35,7 +36,7 @@ extension BeerDetailViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 3:
-            return beer?.foodParing?.count ?? 0
+            return beer?.foodPairing?.count ?? 0
         default:
             return 1
         }
@@ -50,7 +51,7 @@ extension BeerDetailViewController {
         case 2:
             return "BREWERS' TIPS"
         case 3:
-            return beer?.foodParing?.isEmpty ?? true ? nil : "FOOD PARING"
+            return beer?.foodPairing?.isEmpty ?? true ? nil : "FOOD PAIRING"
         default:
             return nil
         }
@@ -72,7 +73,7 @@ extension BeerDetailViewController {
             cell.textLabel?.text = beer?.brewersTips ?? "팁 없는 맥주"
             return cell
         case 3:
-            cell.textLabel?.text = beer?.foodParing?[indexPath.row] ?? ""
+            cell.textLabel?.text = beer?.foodPairing?[indexPath.row] ?? ""
             return cell
         default:
             return cell
